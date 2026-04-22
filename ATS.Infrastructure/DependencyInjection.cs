@@ -34,6 +34,8 @@ public static class DependencyInjection
         // Services
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IResumeService, ResumeService>();
+        services.AddSingleton<PdfParserService>();
 
         return services;
     }
