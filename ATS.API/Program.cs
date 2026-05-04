@@ -77,12 +77,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-// ── Auto-apply Migrations on Startup ──────────────────────────────────────
+// ── Auto-apply Migrations + Seed on Startup ────────────────────────────────
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider
         .GetRequiredService<ATS.Infrastructure.Data.AppDbContext>();
+
     db.Database.Migrate();
+
+    await ATS.Infrastructure.Data.DatabaseSeeder.SeedAsync(scope.ServiceProvider);
 }
 
 app.Run();
