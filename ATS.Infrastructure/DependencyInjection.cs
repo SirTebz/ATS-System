@@ -37,6 +37,9 @@ public static class DependencyInjection
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IResumeService, ResumeService>();
         services.AddScoped<IJobService, JobService>();
+        services.AddScoped<IApplicationService, ApplicationService>();
+        services.AddScoped<IAnalysisService, AnalysisService>();
+        services.AddScoped<IMatchingService, MatchingService>();
         services.AddSingleton<PdfParserService>();
 
         return services;
