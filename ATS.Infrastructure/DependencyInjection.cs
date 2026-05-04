@@ -19,8 +19,8 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-        // Identity
-        services.AddIdentity<User, IdentityRole>(options =>
+        // Identity — use AddIdentityCore to avoid overriding JWT as default scheme
+        services.AddIdentityCore<User>(options =>
         {
             options.Password.RequiredLength = 8;
             options.Password.RequireDigit = true;
@@ -28,6 +28,7 @@ public static class DependencyInjection
             options.Password.RequireNonAlphanumeric = false;
             options.User.RequireUniqueEmail = true;
         })
+        .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<AppDbContext>()
         .AddDefaultTokenProviders();
 
