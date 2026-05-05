@@ -1,5 +1,5 @@
 ﻿import apiClient from "./axios";
-import { AnalysisResult } from "../types";
+import type { AnalysisResult } from "../types/index";
 
 export const analysisApi = {
     getResult: async (applicationId: string): Promise<AnalysisResult> => {

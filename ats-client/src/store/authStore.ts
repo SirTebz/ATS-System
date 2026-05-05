@@ -1,43 +1,45 @@
 ﻿import { create } from "zustand";
-import { AuthResponse } from "../types";
+import type { AuthResponse } from "../types/index";
 
-interface AuthState {
+type UserInfo = {
+    email: string;
+    fullName: string;
+    role: string;
+    expiresAt: string;
+};
+
+type AuthState = {
     token: string | null;
-    user: Omit<AuthResponse, "token"> | null;
+    user: UserInfo | null;
     isAuthenticated: boolean;
     setAuth: (response: AuthResponse) => void;
     clearAuth: () => void;
-}
+};
+
+const getStoredUser = (): UserInfo | null => {
+    try {
+        const stored = localStorage.getItem("ats_user");
+        return stored ? (JSON.parse(stored) as UserInfo) : null;
+    } catch {
+        return null;
+    }
+};
 
 export const useAuthStore = create<AuthState>((set) => ({
     token: localStorage.getItem("ats_token"),
-    user: (() => {
-        const stored = localStorage.getItem("ats_user");
-        return stored ? JSON.parse(stored) : null;
-    })(),
+    user: getStoredUser(),
     isAuthenticated: !!localStorage.getItem("ats_token"),
 
-    setAuth: (response) => {
+    setAuth: (response: AuthResponse) => {
+        const userInfo: UserInfo = {
+            email: response.email,
+            fullName: response.fullName,
+            role: response.role,
+            expiresAt: response.expiresAt,
+        };
         localStorage.setItem("ats_token", response.token);
-        localStorage.setItem(
-            "ats_user",
-            JSON.stringify({
-                email: response.email,
-                fullName: response.fullName,
-                role: response.role,
-                expiresAt: response.expiresAt,
-            })
-        );
-        set({
-            token: response.token,
-            user: {
-                email: response.email,
-                fullName: response.fullName,
-                role: response.role,
-                expiresAt: response.expiresAt,
-            },
-            isAuthenticated: true,
-        });
+        localStorage.setItem("ats_user", JSON.stringify(userInfo));
+        set({ token: response.token, user: userInfo, isAuthenticated: true });
     },
 
     clearAuth: () => {

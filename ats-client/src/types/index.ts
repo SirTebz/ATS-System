@@ -1,36 +1,33 @@
-﻿// ── Auth ──────────────────────────────────────────────────────────────────
-export interface AuthResponse {
+﻿export type AuthResponse = {
     token: string;
     email: string;
     fullName: string;
     role: string;
     expiresAt: string;
-}
+};
 
-export interface RegisterDto {
+export type RegisterDto = {
     firstName: string;
     lastName: string;
     email: string;
     password: string;
     role: "Candidate" | "Recruiter";
-}
+};
 
-export interface LoginDto {
+export type LoginDto = {
     email: string;
     password: string;
-}
+};
 
-// ── Resume ─────────────────────────────────────────────────────────────────
-export interface Resume {
+export type Resume = {
     id: string;
     fileName: string;
     fileUrl: string;
     createdAt: string;
     hasParsedText: boolean;
-}
+};
 
-// ── Job ────────────────────────────────────────────────────────────────────
-export interface Job {
+export type Job = {
     id: string;
     title: string;
     description: string;
@@ -40,24 +37,23 @@ export interface Job {
     recruiterName: string;
     createdAt: string;
     applicationCount: number;
-}
+};
 
-export interface CreateJobDto {
+export type CreateJobDto = {
     title: string;
     description: string;
     company: string;
     location: string;
-}
+};
 
-export interface UpdateJobDto {
+export type UpdateJobDto = {
     title?: string;
     description?: string;
     company?: string;
     location?: string;
     isActive?: boolean;
-}
+};
 
-// ── Application ────────────────────────────────────────────────────────────
 export type ApplicationStatus =
     | "Pending"
     | "UnderReview"
@@ -65,7 +61,7 @@ export type ApplicationStatus =
     | "Rejected"
     | "Hired";
 
-export interface Application {
+export type Application = {
     id: string;
     resumeId: string;
     jobId: string;
@@ -76,15 +72,14 @@ export interface Application {
     status: ApplicationStatus;
     appliedAt: string;
     matchScore: number | null;
-}
+};
 
-export interface CreateApplicationDto {
+export type CreateApplicationDto = {
     resumeId: string;
     jobId: string;
-}
+};
 
-// ── Analysis ───────────────────────────────────────────────────────────────
-export interface AnalysisResult {
+export type AnalysisResult = {
     id: string;
     applicationId: string;
     matchScore: number;
@@ -93,9 +88,8 @@ export interface AnalysisResult {
     suggestions: string[];
     analysisSource: string;
     createdAt: string;
-}
+};
 
-// ── API Error ──────────────────────────────────────────────────────────────
-export interface ApiError {
+export type ApiError = {
     message: string;
-}
+};

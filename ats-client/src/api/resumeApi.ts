@@ -1,5 +1,5 @@
 ﻿import apiClient from "./axios";
-import { Resume } from "../types";
+import type { Resume } from "../types/index";
 
 export const resumeApi = {
     upload: async (file: File): Promise<Resume> => {

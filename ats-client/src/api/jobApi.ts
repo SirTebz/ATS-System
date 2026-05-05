@@ -1,5 +1,5 @@
 ﻿import apiClient from "./axios";
-import { Job, CreateJobDto, UpdateJobDto } from "../types";
+import type { Job, CreateJobDto, UpdateJobDto } from "../types/index";
 
 export const jobApi = {
     getAllJobs: async (): Promise<Job[]> => {

@@ -1,5 +1,5 @@
 ﻿import apiClient from "./axios";
-import { Application, CreateApplicationDto } from "../types";
+import type { Application, CreateApplicationDto } from "../types/index";
 
 export const applicationApi = {
     apply: async (dto: CreateApplicationDto): Promise<Application> => {
@@ -19,10 +19,7 @@ export const applicationApi = {
         return data;
     },
 
-    updateStatus: async (
-        applicationId: string,
-        status: string
-    ): Promise<void> => {
+    updateStatus: async (applicationId: string, status: string): Promise<void> => {
         await apiClient.patch(
             `/application/${applicationId}/status?status=${status}`
         );
