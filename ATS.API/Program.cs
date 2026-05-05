@@ -38,18 +38,35 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 // ── CORS ───────────────────────────────────────────────────────────────────
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowFrontend", policy =>
+//    {
+//        policy.WithOrigins(
+//                builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
+//                ?? ["http://localhost:5173"])
+//              .AllowAnyHeader()
+//              .AllowAnyMethod()
+//              .AllowCredentials();
+//    });
+//});
+
+// ── CORS ───────────────────────────────────────────────────────────────────
+var allowedOrigins = builder.Configuration
+    .GetSection("Cors:AllowedOrigins")
+    .Get<string[]>() ?? ["http://localhost:5173"];
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins(
-                builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
-                ?? ["http://localhost:5173"])
+        policy.WithOrigins(allowedOrigins)
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
     });
 });
+
 
 // ── Controllers + API Explorer ─────────────────────────────────────────────
 builder.Services.AddControllers();

@@ -44,6 +44,7 @@ export default function App() {
                         <Route path="/recruiter/jobs/new" element={<JobFormPage />} />
                         <Route path="/recruiter/jobs/:id" element={<JobFormPage />} />
                         <Route path="/recruiter/candidates" element={<CandidatesPage />} />
+                        <Route path="/analysis/:applicationId" element={<AnalysisResultPage />} />
                     </Route>
                 </Route>
 

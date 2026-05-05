@@ -1,5 +1,4 @@
-﻿import { cn } from "../../utils/cn";
-import { ApplicationStatus } from "../../types";
+﻿import type { ApplicationStatus } from "../../types/index";
 
 const statusStyles: Record<ApplicationStatus, string> = {
     Pending: "bg-yellow-100 text-yellow-700",
@@ -15,10 +14,21 @@ interface BadgeProps {
 
 export const StatusBadge = ({ status }: BadgeProps) => (
     <span
-        className={cn(
-            "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium",
-            statusStyles[status]
-        )}
+        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+        style={{
+            backgroundColor:
+                status === "Shortlisted" ? "#dcfce7"
+                    : status === "Hired" ? "#f3e8ff"
+                        : status === "Rejected" ? "#fee2e2"
+                            : status === "UnderReview" ? "#dbeafe"
+                                : "#fef9c3",
+            color:
+                status === "Shortlisted" ? "#166534"
+                    : status === "Hired" ? "#6b21a8"
+                        : status === "Rejected" ? "#991b1b"
+                            : status === "UnderReview" ? "#1e40af"
+                                : "#854d0e",
+        }}
     >
         {status}
     </span>

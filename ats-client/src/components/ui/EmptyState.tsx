@@ -1,4 +1,4 @@
-﻿import { LucideIcon } from "lucide-react";
+﻿import type { LucideIcon } from "lucide-react";
 
 interface EmptyStateProps {
     icon: LucideIcon;
@@ -14,11 +14,18 @@ export const EmptyState = ({
     action,
 }: EmptyStateProps) => (
     <div className="flex flex-col items-center justify-center py-16 text-center">
-        <div className="p-4 bg-surface-100 rounded-full mb-4">
-            <Icon className="h-8 w-8 text-surface-400" />
+        <div
+            className="p-4 rounded-full mb-4"
+            style={{ backgroundColor: "#f1f5f9" }}
+        >
+            <Icon className="h-8 w-8" style={{ color: "#94a3b8" }} />
         </div>
-        <h3 className="text-lg font-semibold text-surface-700 mb-1">{title}</h3>
-        <p className="text-sm text-surface-400 max-w-sm mb-4">{description}</p>
+        <h3 className="text-lg font-semibold mb-1" style={{ color: "#334155" }}>
+            {title}
+        </h3>
+        <p className="text-sm max-w-sm mb-4" style={{ color: "#94a3b8" }}>
+            {description}
+        </p>
         {action}
     </div>
 );
