@@ -17,10 +17,7 @@ export default function App() {
         <BrowserRouter>
             <Toaster
                 position="top-right"
-                toastOptions={{
-                    duration: 4000,
-                    style: { fontSize: "14px" },
-                }}
+                toastOptions={{ duration: 4000, style: { fontSize: "14px" } }}
             />
             <Routes>
                 {/* Public */}
@@ -28,18 +25,18 @@ export default function App() {
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/" element={<Navigate to="/login" replace />} />
 
-                {/* Candidate routes */}
+                {/* Candidate */}
                 <Route element={<ProtectedRoute allowedRole="Candidate" />}>
                     <Route element={<AppLayout />}>
                         <Route path="/dashboard" element={<DashboardPage />} />
                         <Route path="/resumes" element={<ResumeUploadPage />} />
                         <Route path="/jobs" element={<JobsPage />} />
-                        <Route path="/applications" element={<JobsPage />} />
+                        <Route path="/applications" element={<DashboardPage />} />
                         <Route path="/analysis/:applicationId" element={<AnalysisResultPage />} />
                     </Route>
                 </Route>
 
-                {/* Recruiter routes */}
+                {/* Recruiter */}
                 <Route element={<ProtectedRoute allowedRole="Recruiter" />}>
                     <Route element={<AppLayout />}>
                         <Route path="/recruiter/dashboard" element={<RecruiterDashboardPage />} />
@@ -50,7 +47,6 @@ export default function App() {
                     </Route>
                 </Route>
 
-                {/* Fallback */}
                 <Route
                     path="/unauthorized"
                     element={
